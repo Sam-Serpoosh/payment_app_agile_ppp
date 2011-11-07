@@ -10,4 +10,8 @@ class PayrollDataBase
 				@employees[emp_id]
 		end
 
+		def self.clear
+				@employees.clear
+		end
+
 end
