@@ -10,6 +10,10 @@ class PayrollDataBase
 				@employees[emp_id]
 		end
 
+		def self.remove_employee(emp_id)
+				@employees.delete(emp_id)
+		end
+
 		def self.clear
 				@employees.clear
 		end
