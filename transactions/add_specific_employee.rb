@@ -8,26 +8,11 @@ require '../schedules/monthly_schedule'
 require '../schedules/weekly_schedule'
 require '../schedules/biweekly_schedule'
 
-class AddSpecificEmployee
-
-	attr_reader :add_employee_transaction
-
-	def initialize(emp_id, emp_name, emp_address)
-		@add_employee_transaction = AddEmployee.new(emp_id, emp_name, emp_address)
-		@add_employee_transaction.specific_add_employee_transaction = self
-	end
-
-end
-
-class AddSalariedEmployee < AddSpecificEmployee
+class AddSalariedEmployee < AddEmployee
 
 		def initialize(emp_id, emp_name, emp_address, salary)
 				super(emp_id, emp_name, emp_address)
 				@salary = salary
-		end
-
-		def execute
-				@add_employee_transaction.execute
 		end
 
 		def get_classification
@@ -41,15 +26,11 @@ class AddSalariedEmployee < AddSpecificEmployee
 end
 
 
-class AddHourlyEmployee < AddSpecificEmployee
+class AddHourlyEmployee < AddEmployee 
 
 		def initialize(emp_id, emp_name, emp_address, hourly_rate)
 				super(emp_id, emp_name, emp_address)
 				@hourly_rate = hourly_rate
-		end
-
-		def execute
-				@add_employee_transaction.execute
 		end
 
 		def get_classification
@@ -62,16 +43,12 @@ class AddHourlyEmployee < AddSpecificEmployee
 
 end
 
-class AddCommissionedEmployee < AddSpecificEmployee
+class AddCommissionedEmployee < AddEmployee
 
 		def initialize(emp_id, emp_name, emp_address, salary, commission_rate)
 				super(emp_id, emp_name, emp_address)
 				@salary = salary
 				@commission_rate = commission_rate
-		end
-
-		def execute
-				@add_employee_transaction.execute
 		end
 
 		def get_classification
