@@ -3,9 +3,10 @@ require '../employee'
 require '../payroll_database'
 require '../classifications/salaried_classification'
 require '../classifications/hourly_classification'
+require '../classifications/commissioned_classification'
 require '../schedules/monthly_schedule'
 require '../schedules/weekly_schedule'
-
+require '../schedules/biweekly_schedule'
 
 class AddSpecificEmployee
 
@@ -57,6 +58,28 @@ class AddHourlyEmployee < AddSpecificEmployee
 
 		def get_schedule
 				WeeklySchedule.new
+		end
+
+end
+
+class AddCommissionedEmployee < AddSpecificEmployee
+
+		def initialize(emp_id, emp_name, emp_address, salary, commission_rate)
+				super(emp_id, emp_name, emp_address)
+				@salary = salary
+				@commission_rate = commission_rate
+		end
+
+		def execute
+				@add_employee_transaction.execute
+		end
+
+		def get_classification
+				CommissionedClassification.new(@salary, @commission_rate)
+		end
+
+		def get_schedule
+				BiWeeklySchedule.new
 		end
 
 end
